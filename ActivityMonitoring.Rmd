@@ -1,17 +1,15 @@
 ---
-title: "Reproducible Research: Peer Assessment 1"
+title: "Activity Monitoring"
 author: "Jamison Stevens"
 date: "6/11/2020"
-output:
-  html_document:
-    keep_md: true
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Loading and preprocessing the data
+## Loading and Processing Data
 
 The code below reads the csv file and changes the data in the date column from Character to Date.
 
@@ -23,7 +21,9 @@ The code below reads the csv file and changes the data in the date column from C
   activity$date <- as.Date(activity$date, format = "%Y-%m-%d")
 ```
 
-## What is mean total number of steps taken per day?
+
+
+## Mean Total Steps Per Day
 
 The code below calculates the total number of steps per day, then creates a histogram of the data, finds the average value, and finds the median value.
 
@@ -43,7 +43,7 @@ The code below calculates the total number of steps per day, then creates a hist
 
 The values above are the mean and median total number of steps per day.
 
-## What is the average daily activity pattern?
+## Average Daily Activity Pattern
 
 The code below creates a data frame, avgStepsInInterval, that contains the average number of steps in each 5-minute interval.  Any values of NA are ignored when calculating the average number of steps per interval.  This data frame is used to create a time-series plot of average number of steps by interval and to find the 5-minute interval with the highest average number of steps.
 
@@ -62,7 +62,7 @@ This value above is the 5-minute interval that has the highest average number of
 
 The average daily activity pattern show almost all activity occurs between approximately 5 A.M and 9 P.M., with activity spiking in between 8 A.M. and 9 A.M. on average.
 
-## Imputing missing values
+## Imputing Missing Values
 
 The code below creates a logical vector, naVector, using the is.na function on the steps column.  This vector is used to calculate the number of rows with the value NA in the dataset by taking the sum of naVector.  There are no NAs in the other columns of the data frame, so those columns are ignored.  Next, a new data frame, newActivity, is created, and all of the NA values in the steps column are replaced with the average number of steps for that interval.  This data frame is then used to create a histogram of the average total steps per day with the imputed values, finds the average value, and finds the median value.
 
@@ -96,7 +96,7 @@ The histogram of the data with imputed values shows that there are more values i
 
 The mean and the median calculated above are based on the data frame with imputed values.  The mean number of steps is the same as without the imputed values, but the median number of steps is now slightly larger and equal to the average total number of steps per day.
 
-## Are there differences in activity patterns between weekdays and weekends?
+## Weekdays and Weekends
 
 The code below adds a new column to the newActivity data frame that indicates whether the recording date is during the week or the weekend, represented by the character values Weekday and Weekend, respectively.  This new column is used to aggregate the data for average number of steps by interval and whether it is during the week or the weekend.  This new data frame, avgByWeekdayInterval, is used to create a panel plot containing a two time series plots: the top one representing the average number of steps by interval for weekdays and the bottom one representing the average number of steps by interval for weekends.
 
